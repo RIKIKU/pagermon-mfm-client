@@ -17,7 +17,8 @@ RUN apt-get update && apt-get -y install \
     librtlsdr-dev \
     npm \
     libx11-dev \
-    libpulse-dev
+    libpulse-dev \
+    && apt-get clean
 
 
 #install TSL
@@ -50,6 +51,10 @@ RUN git clone https://github.com/EliasOenal/multimon-ng.git /tmp/multimon-ng \
 
 RUN git clone https://github.com/pagermon/pagermon.git /tmp/pagermon
 
+RUN apt-get remove -y \
+    build-essential \
+    git \
+    cmake
 ADD . /app
 
 WORKDIR /app
